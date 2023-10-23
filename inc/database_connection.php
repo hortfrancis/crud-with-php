@@ -15,5 +15,3 @@ try {
     echo 'Connection to database failed: ' . $e->getMessage();
     exit;
 }
-
-echo "Database seems to have worked!";
