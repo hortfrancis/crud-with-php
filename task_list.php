@@ -15,14 +15,24 @@ include 'inc/header.php';
             <div class="actions-item">
                 <a class="actions-link" href="task.php">
                     <span class="actions-icon">
-                        <svg viewbox="0 0 64 64"><use xlink:href="#task_icon"></use></svg>
+                        <svg viewbox="0 0 64 64">
+                            <use xlink:href="#task_icon"></use>
+                        </svg>
                     </span>
-                Add Task</a>
+                    Add Task</a>
             </div>
 
             <div class="form-container">
-              <ul class="items">
-              </ul>
+                <ul class="items">
+                    <?php
+                    // Populate the UI with tasks from the database
+                    foreach (get_tasks_list() as $item) {
+                        echo '<li>'
+                            . $item['title']
+                            . '</li>';
+                    }
+                    ?>
+                </ul>
             </div>
 
         </div>

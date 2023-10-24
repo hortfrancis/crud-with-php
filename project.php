@@ -4,6 +4,22 @@ require 'inc/functions.php';
 $pageTitle = "Project | Time Tracker";
 $page = "projects";
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $title = trim(htmlspecialchars($_POST['title']));
+    $category = trim(htmlspecialchars($_POST['category']));
+
+    if (empty($title) || empty($category)) {
+        $error_message = "Please fill in the required fields: Title, Category";
+    } else {
+        if (add_project($title, $category)) {
+            header('Location: project_list.php');
+            exit;
+        } else {
+            $error_message = "Unable to add project";
+        }
+    }
+}
+
 include 'inc/header.php';
 ?>
 
@@ -11,7 +27,11 @@ include 'inc/header.php';
     <div class="col-container page-container">
         <div class="col col-70-md col-60-lg col-center">
             <h1 class="actions-header">Add Project</h1>
-
+            <?php
+            if (isset($error_message)) {
+                echo "<p class='message'>$error_message</p>";
+            }
+            ?>
             <form class="form-container form-add" method="post" action="project.php">
                 <table>
                     <tr>
@@ -25,7 +45,7 @@ include 'inc/header.php';
                                 <option value="Billable">Billable</option>
                                 <option value="Charity">Charity</option>
                                 <option value="Personal">Personal</option>
-                        </select></td>
+                            </select></td>
                     </tr>
                 </table>
                 <input class="button button--primary button--topic-php" type="submit" value="Submit" />

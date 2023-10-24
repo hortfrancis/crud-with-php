@@ -26,9 +26,9 @@ include 'inc/header.php';
                 <ul class="items">
                     <?php
                     // Populate the UI with projects from the database
-                    foreach (get_projects_list() as $item) {
+                    foreach (get_projects_list() as $project) {
                         echo '<li>'
-                            . $item['title']
+                            . $project['title']
                             . '</li>';
                     }
                     ?>
